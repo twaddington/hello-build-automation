@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <target name="-bar">
+        <echo message="Hello, Portland!" />
+    </target>
+
+    <target name="foo" depends="-bar" description="Print the text 'Hello, Ant!'">
+        <echo message="Hello, Ant!" />
+        <echoproperties />
+    </target>
+
+</project>
