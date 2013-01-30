@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <!-- The absolute path to the git executable. -->
+    <property name="git.path" value="/usr/bin/git" />
+
+    <!-- Check if the git path is valid. -->
+    <available file="${git.path}" type="file" property="git.installed" />
+
+    <!-- Check if .git is present in the current directory. -->
+    <available file=".git" type="dir" property="git.project" />
+
+    <!-- Ensure .git is available. -->
+    <fail message="Could not locate git at ${git.path}! Please add git.path=/path/to/git to your local.properties."
+            unless="git.installed" />
+
+    <!-- Retrieve the build version from git. -->
+    <target name="-build-version" description="" if="git.project">
+
+        <exec executable="${git.path}" outputproperty="git.revision" failifexecutionfails="true" errorproperty="">
+            <arg value="rev-parse" />
+            <arg value="--short" />
+            <arg value="--verify" />
+            <arg value="HEAD" />
+        </exec>
+        <echo message="Building version ${git.revision} ..." />
+
+    </target>
+
+</project>

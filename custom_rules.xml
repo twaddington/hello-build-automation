@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
 
+    <import file="git_rules.xml" optional="true" />
+
     <target name="-bar">
         <echo message="Hello, Portland!" />
     </target>
@@ -8,6 +10,31 @@
     <target name="foo" depends="-bar" description="Print the text 'Hello, Ant!'">
         <echo message="Hello, Ant!" />
         <echoproperties />
+    </target>
+
+    <target name="-pre-build" depends="-build-version">
+        <echo message="Hello, -pre-build!" />
+        <echo message="${git.revision}" />
+    </target>
+
+    <target name="-pre-compile">
+        <echo message="Hello, -pre-compile!" />
+    </target>
+
+    <target name="-post-compile">
+        <echo message="Hello, -post-compile!" />
+    </target>
+
+    <target name="-post-package">
+        <echo message="Hello, -post-package!" />
+    </target>
+
+    <target name="-post-build">
+        <echo message="Hello, -post-build!" />
+    </target>
+
+    <target name="-pre-clean">
+        <echo message="Hello, -pre-clean!" />
     </target>
 
 </project>
