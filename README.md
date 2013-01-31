@@ -1,4 +1,4 @@
-...
+A collection of custom build targets for Android build automation.
 
 ## License
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+    <!-- The absolute path to the hg executable. -->
+    <property name="hg.path" value="/usr/local/bin/hg" />
+
+    <!-- Check if the hg path is valid. -->
+    <available file="${hg.path}" type="file" property="hg.installed" />
+
+    <!-- Check if .hg is present in the current directory. -->
+    <available file=".hg" type="dir" property="hg.project" />
+
+    <!-- Ensure .hg is available. -->
+    <fail message="Could not locate Mercurial at ${hg.path}! Please add hg.path=/path/to/hg to your local.properties."
+            unless="hg.installed" />
+
+    <!-- Retrieve the build version from hg. -->
+    <target name="-build-version" description="" if="hg.project">
+
+        <exec executable="${hg.path}" outputproperty="hg.revision" failifexecutionfails="true" errorproperty="">
+            <arg value="id" />
+            <arg value="-i" />
+        </exec>
+        <echo message="Building version ${hg.revision} ..." />
+
+    </target>
+
+</project>
+
