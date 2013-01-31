@@ -37,4 +37,27 @@
         <echo message="Hello, -pre-clean!" />
     </target>
 
+    <target name="docs" description="Build Javadoc.">
+
+        <!-- Generate the html docs -->
+        <javadoc
+            destdir="${out.dir}/html"
+            access="private" author="true" version="true" use="true"
+            failonerror="false">
+
+            <classpath>
+                <pathelement
+                    location="${sdk.dir}/platforms/${target}/android.jar" />
+                <pathelement
+                    location="${sdk.dir}/tools/support/annotations.jar" />
+            </classpath>
+
+            <packageset dir="${source.dir}">
+                <include name="com/**/**" />
+            </packageset>
+
+        </javadoc>
+
+    </target>
+
 </project>
