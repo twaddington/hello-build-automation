@@ -41,6 +41,15 @@
 
     <target name="-pre-build">
         <echo message="Hello, -pre-build!" />
+
+        <property name="version.full" value="1.0.0-${git.revision}" />
+
+        <!-- Update the AndroidManifest with the full version. -->
+        <echo message="Updating AndroidManifest.xml with version ${version.full} ..." />
+        <replaceregexp
+            file="${manifest.abs.file}"
+            match="android:versionName=&quot;(.*)&quot;"
+            replace="android:versionName=&quot;${version.full}&quot;" />
     </target>
 
     <target name="-pre-compile">
@@ -57,6 +66,14 @@
 
     <target name="-post-build">
         <echo message="Hello, -post-build!" />
+
+        <!-- Restore the AndroidManifest file. -->
+        <echo message="Cleaning AndroidManifest.xml ..." />
+        <exec executable="${git.path}" failifexecutionfails="true">
+            <arg value="checkout" />
+            <arg value="${manifest.abs.file}" />
+        </exec>
+
     </target>
 
     <target name="-pre-clean">
