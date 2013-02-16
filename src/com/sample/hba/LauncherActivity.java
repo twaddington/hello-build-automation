@@ -12,4 +12,9 @@ public class LauncherActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+
+    /** This method always returns true. */
+    public boolean isRunningAtSnowMobileConf() {
+        return true;
+    }
 }
